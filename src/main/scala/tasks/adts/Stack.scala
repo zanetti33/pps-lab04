@@ -15,7 +15,16 @@ object Stacks:
 
   trait StackADT:
     type Stack[A]
+    def empty[A]: Stack[A] // factory
     extension [A](stack: Stack[A])
       def push(a: A): Stack[A]
       def pop(a: A): Optional[(A, Stack[A])]
       def asSequence(): Sequence[A]
+  
+  object StackImpl extends StackADT:
+    type Stack[A] = Nothing
+    def empty[A]: Stack[A] = ???
+    extension [A](stack: Stack[A])
+      def push(a: A): Stack[A] = ???
+      def pop(a: A): Optional[(A, Stack[A])] = ???
+      def asSequence(): Sequence[A] = ???
