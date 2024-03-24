@@ -2,8 +2,7 @@ package tasks.adts
 
 import org.junit.*
 import org.junit.Assert.*
-import u04lab.ComplexNumbers.*
-import tasks.adts.Stacks.StackImpl
+import tasks.adts.Ex3Stacks.StackImpl
 import u03.Sequences.Sequence
 import u03.Optionals.Optional
 

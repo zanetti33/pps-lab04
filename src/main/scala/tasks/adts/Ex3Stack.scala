@@ -11,7 +11,7 @@ import u03.Optionals.*
  *  -- empty optional is stack is empty
  *  -- a pair of top of the stack and the new stack after removal if not empty
  */
-object Stacks:
+object Ex3Stacks:
 
   trait StackADT:
     type Stack[A]
