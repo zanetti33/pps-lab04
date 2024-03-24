@@ -7,7 +7,7 @@ package u04lab
  *  the test in ComplexTest.
  */
 
-object ComplexNumbers:
+object Ex1ComplexNumbers:
 
   trait ComplexADT:
     type Complex
