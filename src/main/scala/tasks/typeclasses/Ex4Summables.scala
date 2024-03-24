@@ -8,7 +8,7 @@ import Sequence.*
  *  - Uncomment in the main and check if everything works
  */
 
-object Summables:
+object Ex4Summables:
 
   def sumAllInt(seq: Sequence[Int]): Int = seq match
     case Cons(h, t) => h + sumAllInt(t)

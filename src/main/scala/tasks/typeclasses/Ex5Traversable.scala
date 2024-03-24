@@ -15,7 +15,7 @@ import Sequence.*
  *  -- println(_) all elements of an Optional, or of a Traversable
  */
 
-object Traversable:
+object Ex5Traversable:
 
   def log[A](a: A): Unit = println("The next element is: "+a)
 
