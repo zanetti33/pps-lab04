@@ -23,6 +23,9 @@ object Ex6TryModel:
 
   def success[A](value: A): Try[A] = TryImpl.Success(value)
   def failure[A](exception: Throwable): Try[A] = TryImpl.Failure(exception)
+  def exec[A](expression: => A): Try[A] = 
+    try success(expression)
+    catch case e: Throwable => failure(e)
 
   extension [A](m: Try[A]) 
     def getOrElse[B >: A](other: B): B = m match
@@ -53,3 +56,9 @@ object Ex6TryModel:
 
   assert(success(20).map(_ + 10).getOrElse(-1) == 30)
   assert(result2.getOrElse(-1) == -1)
+
+  val result3 = for
+    a <- exec(10)
+    b <- exec(new RuntimeException("error"))
+    c <- exec(30)
+  yield a + c
