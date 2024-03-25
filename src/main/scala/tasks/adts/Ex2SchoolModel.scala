@@ -28,3 +28,25 @@ object SchoolModel:
       def nameOfCourse(teacher: Teacher): String
       def setTeacherToCourse(teacher: Teacher, course: Course): School
       def coursesOfATeacher(teacher: Teacher): Sequence[Course]
+
+    object SchoolModuleImpl extends SchoolModule:
+
+      private case class SchoolImpl(teachers: List[Teacher], courses: List[Course])
+      
+      opaque type School = SchoolImpl
+
+      extension (school: School) override def addCourse(name: String): School = ???
+
+      extension (school: School) override def teacherByName(name: String): Optional[Teacher] = ???
+
+      extension (school: School) override def addTeacher(name: String): School = ???
+
+      extension (school: School) override def coursesOfATeacher(teacher: Teacher): Sequence[Course] = ???
+
+      extension (school: School) override def setTeacherToCourse(teacher: Teacher, course: Course): School = ???
+
+      extension (school: School) override def nameOfTeacher(teacher: Teacher): String = ???
+
+      extension (school: School) override def nameOfCourse(teacher: Teacher): String = ???
+
+      extension (school: School) override def courseByName(name: String): Optional[Course] = ???
