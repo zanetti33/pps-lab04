@@ -2,6 +2,8 @@ package tasks.adts
 import u03.Sequences.*
 import u03.Optionals.*
 import u02.AlgebraicDataTypes.Person
+import u03.Sequences.Sequence.filter
+import u03.Sequences.Sequence.findFirst
 
 /*  Exercise 2: 
  *  Implement the below trait, and write a meaningful test.
@@ -21,7 +23,7 @@ object SchoolModel:
     type Course
     def teacher(name: String): Teacher
     def course(name: String): Course
-    def school(): School
+    def schoolImpl(): School
     extension (school: School)
       def addTeacher(name: String): School
       def addCourse(name: String): School
@@ -40,21 +42,26 @@ object SchoolModel:
     opaque type School = SchoolImpl
     opaque type Teacher = TeacherImpl
     opaque type Course = CoruseImpl
-    def school(): School = SchoolImpl(Sequence.Nil(), Sequence.Nil())
+    def schoolImpl(): School = SchoolImpl(Sequence.Nil(), Sequence.Nil())
+    private def schoolImpl(teacher: Sequence[Teacher])(courses: Sequence[Course]) = SchoolImpl(teacher, courses)
     def teacher(name: String): Teacher = TeacherImpl(name, Sequence.Nil())
     def course(name: String): Course = CoruseImpl(name)
 
     extension (school: School) override def addCourse(name: String): School = ???
 
-    extension (school: School) override def teacherByName(name: String): Optional[Teacher] = ???
+    extension (school: School) override def teacherByName(name: String): Optional[Teacher] = findFirst(school.teachers)((school nameOfTeacher _) == name)
 
-    extension (school: School) override def addTeacher(name: String): School = ???
+    extension (school: School) override def addTeacher(name: String): School = schoolImpl
+      (school.teachers match
+        case Sequence.Cons(head, tail) => Sequence.Cons(teacher(name), Sequence.Cons(head, tail))
+        case Sequence.Nil() => Sequence.Cons(teacher(name), Sequence.Nil()))
+      (school.courses)
 
     extension (school: School) override def coursesOfATeacher(teacher: Teacher): Sequence[Course] = ???
 
     extension (school: School) override def setTeacherToCourse(teacher: Teacher, course: Course): School = ???
 
-    extension (school: School) override def nameOfTeacher(teacher: Teacher): String = ???
+    extension (school: School) override def nameOfTeacher(teacher: Teacher): String = teacher.name
 
     extension (school: School) override def nameOfCourse(teacher: Teacher): String = ???
 

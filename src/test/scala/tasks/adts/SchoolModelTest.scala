@@ -7,24 +7,24 @@ import u02.AlgebraicDataTypes.Person
 import u03.Optionals.Optional
 import org.junit.jupiter.api.BeforeEach
 import u03.Optionals.Optional.orElse
+import scala.collection.View.Empty
 
 class SchoolModelTest {
 
     // Choice of implementation to test
-  val schoolModule: SchoolModule = SchoolModuleImpl
-  import schoolModule.*
+    val schoolModule: SchoolModule = SchoolModuleImpl
+    import schoolModule.*
 
-  var unibo: School = school()
+    var unibo: School = schoolImpl()
 
-  @BeforeEach def resetSchool() =
-    unibo = school()
+    @BeforeEach def resetSchool() =
+        unibo = schoolImpl()
+  
+    @Test def schoolIsInitiallyEmpty() =
+        assertEquals(Optional.Empty(), unibo teacherByName "Viroli")
 
-  // From now, everything is independent of specific implementation of Complex
-
-  @Test def teachersCanBeAdded() =
-    assertEquals(Optional.Empty, unibo teacherByName "Viroli")
-    unibo addTeacher "Viroli"
-    assertEquals(Optional.Just(Teacher), unibo nameOfTeacher (orElse(unibo teacherByName "Viroli")))
+    @Test def teachersCanBeAdded() =
+        assertEquals(Optional.Just(teacher("Viroli")), unibo addTeacher "Viroli" teacherByName "Viroli")
     
 
 }
