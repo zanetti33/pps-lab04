@@ -49,7 +49,7 @@ object SchoolModel:
 
     extension (school: School) override def addCourse(name: String): School = ???
 
-    extension (school: School) override def teacherByName(name: String): Optional[Teacher] = findFirst(school.teachers)((school nameOfTeacher _) == name)
+    extension (school: School) override def teacherByName(name: String): Optional[Teacher] = ???
 
     extension (school: School) override def addTeacher(name: String): School = schoolImpl
       (school.teachers match
